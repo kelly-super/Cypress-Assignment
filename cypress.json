@@ -1,4 +1,12 @@
 {
   "chromeWebSecurity": false,
-  "nodeVersion": "system"
+  "nodeVersion": "system",
+  "defaultCommandTimeout": 4000,
+  "env": {
+    "testEmail": "kellycc@gmail.com",
+    "testPassword": "123456",
+    "testUser": "tester"
+  },
+  "viewportWidth": 1200,
+  "viewportHeight": 1200
 }

@@ -1,0 +1,16 @@
+[
+  {
+    "firstName": "JoHo",
+    "lastName": "Hu",
+    "address1": "this is the first testcase address1",
+    "address2": "this is the first testcase address2",
+    "city": "Auckland",
+    "state": "Alaska",
+    "zipCode": "0215",
+    "country": "United States",
+    "age": "30",
+    "website": "www.test.com",
+    "phone": "21654547",
+    "note": "this is the first testcase"
+  }
+]

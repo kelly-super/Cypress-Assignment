@@ -1,0 +1,38 @@
+{
+  "correct_info": {
+    "firstName": "correct_info",
+    "lastName": "Test1",
+    "email": "Test1@gmail.com",
+    "Gender": "Male",
+    "Mobile": "0221079642",
+    "State": "NCR",
+    "City": "Delhi"
+  },
+  "wrong_email": {
+    "firstName": "wrong_email",
+    "lastName": "Test1",
+    "email": "wongemail",
+    "Gender": "Male",
+    "Mobile": "0221079642",
+    "State": "NCR",
+    "City": "Delhi"
+  },
+  "wrong_Gender": {
+    "firstName": "wrong_Gender",
+    "lastName": "Test1",
+    "email": "Test1",
+    "Gender": "test",
+    "Mobile": "0221079642",
+    "State": "Test1",
+    "City": "Test1"
+  },
+  "wrong_State": {
+    "firstName": "wrong_State",
+    "lastName": "Test1",
+    "email": "correct@gmail",
+    "Gender": "Male",
+    "Mobile": "0221079642",
+    "State": "Test1",
+    "City": "Test1"
+  }
+}

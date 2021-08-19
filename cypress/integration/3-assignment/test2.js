@@ -50,8 +50,11 @@ describe('Homework2', () => {
 
         // Click the index is 2 item add to cart
         cy.get('.inventory_list').find('.inventory_item').eq(2).contains('Add to cart').click();
-        var item1Name = cy.get('.inventory_list').find('.inventory_item').eq(2).find('.inventory_item_name').text;
-        cy.log('Add the first item to cart', item1Name);
+        cy.get('.inventory_list').find('.inventory_item').eq(2).find('.inventory_item_name').then(item => {
+            cy.log('Add the first item to cart', item.text());
+        });
+
+
 
         //add the item 'Onesie' to cart
         cy.get('.inventory_list').find('.inventory_item')
