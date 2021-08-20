@@ -100,6 +100,7 @@ describe.only('Homework 4, practise before and after hook', () => {
         cy.get('input[value="Sign in"]').click();
         cy.url().should('contain', 'http://a.testaddressbook.com');
         cy.log('Login successfully', Cypress.env('testEmail'));
+        //  Cypress.Cookies.preserveOnce('_address_book_session', 'remember_token');
     });
     //   delete the address created justnow
     afterEach(function () {
@@ -108,7 +109,7 @@ describe.only('Homework 4, practise before and after hook', () => {
         // cy.get('table').get('a[data-test^="destroy"]').each(($el) => {
         //     cy.wrap($el).trigger('click');
         // });
-        cy.get('table').get(`a[data-test="destroy-${this.addressNo}"]`).should('be.visible').parent().click();
+        cy.get('table').get(`a[data-test="destroy-${this.addressNo}"]`).should('be.visible').click();
         cy.log('Successfully delete the address, address no', this.addressNo);
     });
     // Sign out
@@ -123,16 +124,7 @@ describe.only('Homework 4, practise before and after hook', () => {
             cy.visit('http://a.testaddressbook.com/addresses');
         }
     });
-    it.skip('delet all', () => {
-        cy.visit('http://a.testaddressbook.com/addresses');
-        cy.get('table').get('a[data-test^="destroy"]').each(($el, index, $list) => {
-            const text = $el.text();
-            if (text.includes('Destroy')) {
-                cy.log('text', index);
-                cy.get('td:nth-child(7)').first().click();
-            }
-        });
-    });
+
     //Create a new address 
     it('Create a new address', () => {
         cy.url().then(url => {
@@ -167,6 +159,17 @@ describe.only('Homework 4, practise before and after hook', () => {
             cy.url().then(url => {
                 cy.wrap(url.split('/').pop()).as('addressNo').then(no => cy.log(`Successfully created address info ${firstName}`));
             });
+        });
+    });
+
+    it.skip('delet all', () => {
+        cy.visit('http://a.testaddressbook.com/addresses');
+        cy.get('table').get('a[data-test^="destroy"]').each(($el, index, $list) => {
+            const text = $el.text();
+            if (text.includes('Destroy')) {
+                cy.log('text', index);
+                cy.get('td:nth-child(7)').first().click();
+            }
         });
     });
 });
