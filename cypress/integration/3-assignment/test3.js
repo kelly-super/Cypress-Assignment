@@ -70,8 +70,9 @@ describe("Homework2 - Submit the registion form", () => {
 // 增加一个cy.addToCart(number) 命令，该命令接受一个整数（<6），根据该参数随机的添加相应数量的商品到购物车
 // 增加一个cy.clearCart()命令，该命令负责清空购物车（通过删除掉所有商品的方式）
 // 将case做一定的修改，在case的过程中调用cy.addToCart()命令，在case的末尾调用cy.clearCart()
-describe('Homework 3 - custom command', () => {
+describe.only('Homework 3 - custom command', () => {
     before(function () {
+
         cy.visit('https://www.saucedemo.com/');
         cy.get('#user-name').clear().type('standard_user');
         cy.get('#password').clear().type('secret_sauce');
@@ -80,8 +81,12 @@ describe('Homework 3 - custom command', () => {
         cy.log('Login successfully, happy shopping!');
 
     });
-    it('custom command', () => {
-        cy.clearCart();
+    it('Call the custom command- addToCart', () => {
+        var qty = Math.floor((Math.random() * 7));
+        cy.addToCart(qty);
+    });
+    it('Call the custom command - clearCart()', () => {
+        cy.clearCart('standard_user');
     });
 });
 
@@ -91,7 +96,7 @@ describe('Homework 3 - custom command', () => {
 // afterEach() 删除新创建的地址信息
 // after() 签退
 // case 添加一条新地址（在表格里填写最基本信息即可）
-describe.only('Homework 4, practise before and after hook', () => {
+describe('Homework 4, practise before and after hook', () => {
     //Open the url and login
     before(function () {
         cy.visit('http://a.testaddressbook.com/sign_in');
