@@ -123,6 +123,7 @@ Test Case
 
 describe('Practise4 - homework3 - API testing', () => {
     before('GET user id is 2 and delete it', function () {
+
         cy.request('GET', 'https://reqres.in/api/users/2')
             .then((response) => {
                 expect(response.status).equal(200);
@@ -188,7 +189,7 @@ describe.only('Practise4 - homework4 - Page Object', () => {
     before(function () {
         cy.fixture('loginInfo.json').then((data) => {
             this.data = data;
-            this.items = [1];
+            this.items = [];
             this.proList = new ProList();
             this.cart = new Cart();
             this.loginPage = new LoginPage();
@@ -213,9 +214,9 @@ describe.only('Practise4 - homework4 - Page Object', () => {
     });
 
     it('Add 2 items to cart', function () {
-        cy.addToCartByPageObject(2, []); //how to pass this.items;
-        new ProList().goToCart().click();
-        cy.clearCartByPageObject();
-        //   cy.clearCartByPageObject('standard_user', [], 1);
+        //  cy.addToCartByPageObject(2, []); //how to pass this.items;
+        //   new ProList().goToCart().click();
+        //   cy.clearCartByPageObject();
+        cy.clearCartByPageObject(this.data[0].userName, [], 1);
     });
 });
