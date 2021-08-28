@@ -26,21 +26,27 @@
 
 import ProList from 'C:/Users/hao/Desktop/Testing Training/Assignment/Cypress-Assignment/cypress/support/proList.js';
 import Cart from 'C:/Users/hao/Desktop/Testing Training/Assignment/Cypress-Assignment/cypress/support/cart.js';
-
+// Cypress.on('uncaught:exception', (err, runnable) => {
+//     // returning false here prevents Cypress from
+//     // failing the test
+//     return false;
+// });
 //This is for practise 3 - homework3 - practise custom command
 Cypress.Commands.add('addToCart', (quantity) => {
     cy.log('add items to cart', quantity);
     cy.url().should('eq', 'https://www.saucedemo.com/inventory.html');
     var count = 0;
-    cy.get('.inventory_list').find('[data-test^=add-to-cart]').each(($el, index, $list) => {
-        cy.log('list.length', $list.length);
-        if (count < quantity) {
-            cy.wrap($el).click();
+    var item = JSON.parse(localStorage.getItem('cart-contents')) || [];
+    cy.get('.inventory_list').find('.inventory_item').each(($el, index) => {
+        if (index >= item.length && count < quantity) {
+            cy.wrap($el).find("button").click();
             count++;
             cy.log(`you have added '${count}' items to cart`);
+            cy.wrap($el).get('.inventory_item_img > a').then($el1 => {
+                item.push($el1.attr("id").split("_")[1] * 1);
+            })
         }
-    });
-
+    }).then(() => localStorage.setItem('cart-contents', JSON.stringify(item)));
 });
 //This is for practise 3 - homework3 - practise custom command
 Cypress.Commands.add('clearCart', (customer) => {
