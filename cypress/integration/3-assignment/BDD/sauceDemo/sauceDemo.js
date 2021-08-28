@@ -58,37 +58,49 @@ Then('go to cartlist', () => {
 
 
 
-// Given('Open the cartlist page', () => {
-//     cy.visit('https://www.saucedemo.com/cart.html');
-// });
-// When('click checkout button, go to your information page', () => {
-//     cy.get('[data-test=checkout]').click();
-//     cy.url().then(url, () => {
-//         expect(url).include('checkout-step-one');
-//     });
-// });
+Given('Open the cartlist page', () => {
+    cy.url().then(url => {
+        expect(url).to.equal('https://www.saucedemo.com/cart.html');
+    });
+});
+When('click checkout button, go to your information page', () => {
+    cy.setCookie('session-username', 'standard_user');
+    localStorage.setItem("cart-contents", JSON.stringify([0, 5, 1, 4]));
+    cy.get('[data-test=checkout]').click();
+    cy.url().then(url => {
+        cy.log('current:', url);
+        expect(url).include('checkout-step-one');
+    });
+});
 
-// Then('input the First Name, Last Namem Zip Code', () => {
-//     cy.get('#first-name').clear().type('test1');
-//     cy.get('#last-name').clear().type('test1');
-//     cy.get('#postal-code').clear().type('test1');
-// });
-// And('click the continue button', () => {
-//     cy.get('#continue').click();
-// });
-// Then('valiadate the item total', () => {
-//     var total = 0;
-//     cy.get('.cart_list').find('cart_item').each(($el, index, $list), () => {
-//         var qty = $el.find('.cart_quantity').text();
-//         var price = $el.find('.inventory_item_price').text();
-//         cy.log(' items ', qty, price);
-//         total += qty * price;
-//     });
+Then('input the First Name, Last Namem Zip Code', () => {
+    cy.get('#first-name').clear().type('test1');
+    cy.get('#last-name').clear().type('test1');
+    cy.get('#postal-code').clear().type('test1');
+});
+And('click the continue button', () => {
 
-//     cy.get('.summary_subtotal_label').should('contains', total);
+    cy.get('#continue').click();
 
-// });
-// Then('click the finish button, finish shopping', () => {
-//     cy.get('#finish').click();
-//     cy.url().should('include', 'checkout-complete');
-// });
+});
+Then('valiadate the item total', () => {
+    cy.getCookie('session-username').then((name) => {
+        cy.log(name.value, JSON.stringify(localStorage.getItem('cart-contents')));
+    });
+    var total = 0;
+    cy.get('.cart_list').find('.cart_item').each(($el, index, $list) => {
+        var qty = $el.find('.cart_quantity').text();
+        var price = $el.find('.inventory_item_price').text();
+        cy.log(' items ', qty, price);
+        total += qty * (price.replace('$', '') * 1) * 1;
+    }).then(() => {
+        cy.log('total', total)
+        cy.get('.summary_subtotal_label').then((text) => {
+            expect(text).contain(total);
+        });
+    });
+});
+Then('click the finish button, finish shopping', () => {
+    cy.get('#finish').click();
+    cy.url().should('include', 'checkout-complete');
+});

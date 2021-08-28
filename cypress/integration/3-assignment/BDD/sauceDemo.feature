@@ -15,11 +15,11 @@ Then add the item Bike Light into cart
 Then validate the item's quantity in cart is 2
 Then go to cartlist
 
-# Scenario: Checkout
-# Given Open the cartlist page
-# When click checkout button, go to your information pagee
-# Then input the First Name, Last Namem Zip Code
-# And click the continue button
-# Then valiadate the item total
-# Then click the finish button, finish shopping
+Scenario: Checkout
+Given Open the cartlist page
+When click checkout button, go to your information page
+Then input the First Name, Last Namem Zip Code
+And click the continue button
+Then valiadate the item total
+Then click the finish button, finish shopping
 
