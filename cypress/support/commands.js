@@ -32,6 +32,12 @@ import Cart from 'C:/Users/hao/Desktop/Testing Training/Assignment/Cypress-Assig
 //     return false;
 // });
 //This is for practise 3 - homework3 - practise custom command
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
+
+addMatchImageSnapshotCommand();
+
+
+
 Cypress.Commands.add('addToCart', (quantity) => {
     cy.log('add items to cart', quantity);
     cy.url().should('eq', 'https://www.saucedemo.com/inventory.html');
