@@ -9,9 +9,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^8.2.0"
+    "cypress": "^8.2.0",
+    "cypress-cucumber-preprocessor": "^4.2.0",
+    "cypress-image-snapshot": "^4.0.1"
   },
   "dependencies": {
     "cypress-xpath": "^1.6.2"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }
